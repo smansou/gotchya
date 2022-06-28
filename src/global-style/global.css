@@ -1,0 +1,22 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.page {
+  height: 100%;
+  width: 100%;
+  background-color: #fbfdff;
+}
+.pC {
+  color: #ec9b6a;
+}
+.pBC {
+  background-color: #ec9b6a;
+}
+.sC {
+  color: #b2d1d6;
+}
+.sBC {
+  background-color: #b2d1d6;
+}
