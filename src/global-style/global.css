@@ -2,11 +2,11 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
-  overflow: hidden;
 }
 .page {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 body {
   background-color: #fbfdff;
@@ -14,6 +14,7 @@ body {
 .slide {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 .pC {
   color: #ec9b6a;

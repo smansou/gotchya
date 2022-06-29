@@ -22,7 +22,7 @@ const RightAnswerCard = ({
 
   return (
     <div className={`answer-card ${bg}`} onClick={onAnswerClick}>
-      {answer}
+      <p>{answer}</p>
     </div>
   );
 };
