@@ -12,8 +12,10 @@ const WrongAnswerCard = ({
     if (clicked) return;
     setClicked(true);
     setIsCorrect(false);
-    setWordsIndex((prev) => prev + 1);
-    setIsHebrewWord((prev) => !prev);
+    setTimeout(() => {
+      setIsHebrewWord((prev) => !prev);
+      setWordsIndex((prev) => prev + 1);
+    }, 1000);
   };
 
   return (
