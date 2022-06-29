@@ -20,7 +20,14 @@ const Message = ({
       setDisplayMessage(false);
       setClicked(false);
     }
-  }, [hebrewReady, arabicReady]);
+  }, [
+    hebrewReady,
+    arabicReady,
+    setWordsIndex,
+    setIsHebrewWord,
+    setDisplayMessage,
+    setClicked,
+  ]);
 
   return (
     <div className="message-window">
