@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 
 const Card = (props) => {
   return (
-   
-    <div className={props.isInactive ? "hidden" : ''}
-    id="CardParent"
-    onClick={() => {
-      props.onClick(props.index);
+    <div
+      className={props.isInactive ? "hidden" : ""}
+      id="CardParent"
+      onClick={() => {
+        props.onClick(props.index);
       }}
     >
       {props.isFlipped ? (
-        <div className="back">
+        <div className="back ">
           <p className={props.isArabic ? `arabicCard` : null}>{props.text}</p>
         </div>
       ) : (

@@ -5,14 +5,26 @@ import ExplanationText from "../../styled-components/ExplanationText/Explanation
 import { forwardRef } from "react";
 const ExplanationSlide = forwardRef((props, ref) => {
   return (
-    <div ref={ref} id="ExplanationSlide" className="slide">
+    <div
+      ref={ref}
+      id="ExplanationSlide"
+      className={
+        props.isEnd
+          ? props.show
+            ? "done"
+            : "wait"
+          : (props.isAbsulute ? "abs slide" : "rel slide") +
+            " " +
+            (props.hiden ? "hide" : null)
+      }
+    >
       <div className="content">
         <CheckBox isArabic={true} action={props.action1} />
         <ExplanationText isArabic={true} text={props.aText} />
         <ExplanationText text={props.hText} />
         <CheckBox action={props.action2} />
       </div>
-      <SpinningLogo />
+      <SpinningLogo spinningLogoClass="spin" />
     </div>
   );
 });

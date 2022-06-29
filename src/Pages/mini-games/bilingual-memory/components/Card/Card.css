@@ -17,6 +17,7 @@
 }
 
 .back {
+  transition: all 0.5s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,9 +46,10 @@
 }
 .back p {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
+  color: #b2d1d6;
 }
-.hidden{
+.hidden {
   display: none;
 }
