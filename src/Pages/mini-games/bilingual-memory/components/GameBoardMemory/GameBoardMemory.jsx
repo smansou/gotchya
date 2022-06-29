@@ -3,6 +3,8 @@ import Card from "../Card/Card";
 import "./GameboardMemory.css";
 import { shuffleRandomly } from "../../../../../utils/utils";
 import TurnPanel from "../TurnPanel/TurnPanel";
+import gotchya from "../../../../../api/gotchyaApi";
+
 const GameBoardMemory = () => {
   const [cards, setCards] = useState([]);
   const [openCards, setOpenCards] = useState([]);
@@ -10,25 +12,38 @@ const GameBoardMemory = () => {
   const [moves, setMoves] = useState(0);
   const [turn, setTurn] = useState(true);
   const timeout = useRef(null);
+  
 
   useEffect(()=>{
-    // randomly choose 6 word objects from data to fill 12 tiles
+    getWords()
+    randomizeAndFill()
+  },[])
+
+  const getWords = async () => {
+    let {data} =  await gotchya.get('/wordBank');
+    return data;
+   }
+
+  const randomizeAndFill = async () => {
+        // randomly choose 6 word objects from data to fill 12 tiles
   let arrayOfWordObjects = [];
   let i = 0;
+  let rawData = await getWords();
   while (i < 6) {
-    // let randomIndex = Math.floor(Math.random() * myWords.length);
-    // arrayOfWordObjects.push(myWords[randomIndex]);
-    arrayOfWordObjects.push(myWords[i]);
+    let randomIndex = Math.floor(Math.random() * rawData.length);
+    arrayOfWordObjects.push(rawData[randomIndex]);
     i++;
   }
   // make array of {word & ID} pairs from hebrew and arabic and id
   let wordsArray = []
-  arrayOfWordObjects.forEach((word) => {
-      wordsArray.push({ word: word.hebrew, id: word.id },
-                      { word: word.arabic, id: word.id, isArabic: true })
+  arrayOfWordObjects.forEach((word, i) => {
+      wordsArray.push({ word: word.hebrew, id: i},
+                      { word: word.arabic, id: i, isArabic: true })
     });
-  setCards(wordsArray);
-  },[])
+    let shuffled = shuffleRandomly(wordsArray);
+  setCards(shuffled);
+  console.log(shuffled);
+  }
 
   // Check if both the words have same id. If so, mark them inactive
   const evaluate = () => {
@@ -36,8 +51,6 @@ const GameBoardMemory = () => {
     if (cards[first].id === cards[second].id) {
       setClearedCards((prev) => ({ ...prev, [cards[first].id]: true }));
       setOpenCards([]);
-      
-      
     }
 
     
@@ -74,7 +87,6 @@ const GameBoardMemory = () => {
   };
 
   const checkIsInactive = (card) => {
-    console.log(clearedCards[card.id]);
     return Boolean(clearedCards[card.id]);
   };
   const drawBoard = (words) => {
@@ -113,47 +125,3 @@ const GameBoardMemory = () => {
 
 export default GameBoardMemory;
 
-const myWords = [
-  {
-    hebrew: "מדינה",
-    arabic: "دولة",
-    Hspelling: "beit sefer", // arabic pronounciation in Hebrew letters
-    Aspelling: "madrasa", // Hebrew pronounciation in Arabic letters
-    id: 2,
-  },
-  {
-    hebrew: "ממשלה",
-    arabic: "بببب",
-    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
-    Aspelling: "madrasa", // Arabic pronounciation in english letters,
-    id: 3,
-  },
-  {
-    hebrew: "מחקר",
-    arabic: "ججججج",
-    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
-    Aspelling: "madrasa", // Arabic pronounciation in english letters,
-    id: 4,
-  },
-  {
-    hebrew: "חיסון",
-    arabic: "ددددد",
-    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
-    Aspelling: "madrasa", // Arabic pronounciation in english letters,
-    id: 5,
-  },
-  {
-    hebrew: "אורח",
-    arabic: "هههه",
-    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
-    Aspelling: "madrasa", // Arabic pronounciation in english letters,
-    id: 6,
-  },
-  {
-    hebrew: "רושם",
-    arabic: "ووووو",
-    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
-    Aspelling: "madrasa", // Arabic pronounciation in english letters,
-    id: 7,
-  },
-];
