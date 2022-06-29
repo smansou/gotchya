@@ -9,7 +9,6 @@ const TriviaAnswers = ({
   setWordsIndex,
   setCorrectAnswers,
   setIsHebrewWord,
-  setDisplayMessage,
   setIsCorrect,
   clicked,
   setClicked,
@@ -32,7 +31,6 @@ const TriviaAnswers = ({
           setIsHebrewWord={setIsHebrewWord}
           clicked={clicked}
           setClicked={setClicked}
-          setDisplayMessage={setDisplayMessage}
           setIsCorrect={setIsCorrect}
         />
       );
@@ -47,7 +45,6 @@ const TriviaAnswers = ({
         setIsHebrewWord={setIsHebrewWord}
         clicked={clicked}
         setClicked={setClicked}
-        setDisplayMessage={setDisplayMessage}
         setIsCorrect={setIsCorrect}
       />
     );
