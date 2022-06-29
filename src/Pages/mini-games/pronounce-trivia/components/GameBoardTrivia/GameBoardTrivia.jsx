@@ -92,6 +92,18 @@ const GameBoardTrivia = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const getWords = async () => {
+      try {
+        const words = await gotchya.get("/wordBank");
+        console.log(words);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getWords();
+  }, []);
+
+  useEffect(() => {
     if (wordsIndex === 9) {
       console.log(correctAnswers);
       navigate("/");
