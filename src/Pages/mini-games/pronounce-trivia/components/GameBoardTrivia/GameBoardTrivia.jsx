@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Message from "../Message/Message";
 import TriviaAnswers from "../TriviaAnswers/TriviaAnswers";
 import TriviaQuestion from "../TriviaQuestion/TriviaQuestion";
+import gotchya from "../../../../../api/gotchyaApi.js";
 import "./GameBoardTrivia.css";
 
 export const words = [
