@@ -14,7 +14,7 @@ const IntroPage = () => {
         <SitingSvg />
         <CheckBox />
       </div>
-      <ExplanationSlide />
+      {/* <ExplanationSlide /> */}
     </div>
   );
 };
