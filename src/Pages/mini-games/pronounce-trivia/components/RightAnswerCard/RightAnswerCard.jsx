@@ -17,9 +17,11 @@ const RightAnswerCard = ({
     setClicked(true);
     setBg("sBC");
     setIsCorrect(true);
-    setCorrectAnswers((prev) => prev + 1);
-    setWordsIndex((prev) => prev + 1);
-    setIsHebrewWord((prev) => !prev);
+    setTimeout(() => {
+      setCorrectAnswers((prev) => prev + 1);
+      setIsHebrewWord((prev) => !prev);
+      setWordsIndex((prev) => prev + 1);
+    }, 1000);
   };
 
   return (

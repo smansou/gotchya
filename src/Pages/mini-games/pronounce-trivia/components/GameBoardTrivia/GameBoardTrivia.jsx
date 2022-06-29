@@ -3,92 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { arabicWords } from "../../wordsData/arabicWords.js";
 import { hebrewWords } from "../../wordsData/hebrewWords";
 import SpinningLogo from "../../../../../styled-components/SpinningLogo/SpinningLogo";
-import Message from "../Message/Message";
 import TriviaAnswers from "../TriviaAnswers/TriviaAnswers";
 import TriviaQuestion from "../TriviaQuestion/TriviaQuestion";
 import gotchya from "../../../../../api/gotchyaApi.js";
 import "./GameBoardTrivia.css";
 
-export const words = [
-  {
-    hebrew: "בית ספר",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " שלום",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " מגבת",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " אוכל",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " סיפור",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " רצפה",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " משהו",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " עוד משהו",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " עוד עוד משהו",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-  {
-    hebrew: " אההההההההההההההה",
-    arabic: "مدرسة",
-    Hspelling: "מה-דרה-סה", // Hebrew pronounciation in english letters
-    Aspelling: "بيت-سيفر", // Arabic pronounciation in english letters,
-    id: "1",
-  },
-];
-
-const arabicWrongAnswers = ["الأسرة", "نافورة", "شيئا ما"];
-const hebrewWrongAnswers = ["1משהו", "2משהו", "3משהו"];
-
 const GameBoardTrivia = () => {
-  // const [words, setWords] = useState([]);
-  // const [arabicWrongAnswers, setArabicWrongAnswers] = useState([]);
-  // const [hebrewWrongAnswers, setHebrewWrongAnswers] = useState([]);
+  const [words, setWords] = useState([]);
+  const [arabicWrongAnswers, setArabicWrongAnswers] = useState([]);
+  const [hebrewWrongAnswers, setHebrewWrongAnswers] = useState([]);
   const [wordsIndex, setWordsIndex] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isHebrewWord, setIsHebrewWord] = useState(true);
@@ -101,7 +24,7 @@ const GameBoardTrivia = () => {
   const chooseThreeWrongAnswers = (wrongAnswersList, words, lang) => {
     const chosenWords = [];
     for (let i = 0; chosenWords.length < 3; i++) {
-      const rand = Math.floor(Math.random * wrongAnswersList.length);
+      const rand = Math.floor(Math.random() * wrongAnswersList.length);
       if (words.every((word) => word[lang] !== wrongAnswersList[rand])) {
         chosenWords.push(wrongAnswersList[rand]);
       }
@@ -113,9 +36,9 @@ const GameBoardTrivia = () => {
     const indices = [];
     const randomWords = [];
     for (let i = 0; randomWords.length < 8; i++) {
-      const rand = Math.floor(Math.random * words.length);
-      indices.push(rand);
-      if (!indices.some((index) => index === rand)) {
+      const rand = Math.floor(Math.random() * words.length);
+      if (indices.indexOf(rand) === -1) {
+        indices.push(rand);
         randomWords.push(words[rand]);
       }
     }
@@ -123,31 +46,30 @@ const GameBoardTrivia = () => {
     return randomWords;
   };
 
-  // useEffect(() => {
-  //   const getWords = async () => {
-  //     try {
-  //       const words = await gotchya.get("/wordBank");
-  //       console.log(words);
-  //       const randomWords = chooseTenRandomWords(words);
-  //       setWords(randomWords);
-  //       const heWords = chooseThreeWrongAnswers(
-  //         hebrewWords,
-  //         randomWords,
-  //         "hebrew"
-  //       );
-  //       const arWords = chooseThreeWrongAnswers(
-  //         arabicWords,
-  //         randomWords,
-  //         "arabic"
-  //       );
-  //       setArabicWrongAnswers(arWords);
-  //       setHebrewWrongAnswers(heWords);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-  //   getWords();
-  // }, []);
+  useEffect(() => {
+    const getWords = async () => {
+      try {
+        const { data: words } = await gotchya.get("/wordBank");
+        const randomWords = chooseEightRandomWords(words);
+        setWords(randomWords);
+        const heWords = chooseThreeWrongAnswers(
+          hebrewWords,
+          randomWords,
+          "hebrew"
+        );
+        const arWords = chooseThreeWrongAnswers(
+          arabicWords,
+          randomWords,
+          "arabic"
+        );
+        setArabicWrongAnswers(arWords);
+        setHebrewWrongAnswers(heWords);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getWords();
+  }, []);
 
   useEffect(() => {
     setClicked(false);
