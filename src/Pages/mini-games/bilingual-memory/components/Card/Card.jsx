@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const Card = (props) => {
   return (
+   
     <div className={props.isInactive ? "hidden" : ''}
     id="CardParent"
     onClick={() => {
