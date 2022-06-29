@@ -6,18 +6,20 @@ const RightAnswerCard = ({
   setCorrectAnswers,
   clicked,
   setClicked,
-  setDisplayMessage,
   setIsCorrect,
+  setWordsIndex,
+  setIsHebrewWord,
 }) => {
   const [bg, setBg] = useState("");
 
   const onAnswerClick = () => {
     if (clicked) return;
     setClicked(true);
-    setBg("green");
-    setDisplayMessage(true);
+    setBg("sBC");
     setIsCorrect(true);
     setCorrectAnswers((prev) => prev + 1);
+    setWordsIndex((prev) => prev + 1);
+    setIsHebrewWord((prev) => !prev);
   };
 
   return (

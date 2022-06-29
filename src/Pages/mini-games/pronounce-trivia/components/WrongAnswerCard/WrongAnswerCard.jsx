@@ -1,25 +1,23 @@
-import { useState } from "react";
 import "./WrongAnswerCard.css";
 
 const WrongAnswerCard = ({
   answer,
   clicked,
   setClicked,
-  setDisplayMessage,
   setIsCorrect,
+  setWordsIndex,
+  setIsHebrewWord,
 }) => {
-  const [bg, setBg] = useState("");
-
   const onAnswerClick = () => {
     if (clicked) return;
     setClicked(true);
-    setBg("red");
-    setDisplayMessage(true);
     setIsCorrect(false);
+    setWordsIndex((prev) => prev + 1);
+    setIsHebrewWord((prev) => !prev);
   };
 
   return (
-    <div className={`answer-card ${bg}`} onClick={onAnswerClick}>
+    <div className="answer-card" onClick={onAnswerClick}>
       {answer}
     </div>
   );

@@ -1,9 +1,9 @@
 import logo from "../../assets/svg/roundLogo.svg";
 import "./SpinningLogo.css";
-const SpinningLogo = () => {
+const SpinningLogo = ({ spinningLogoClass }) => {
   return (
     <div id="sLogoDiv">
-      <img className="spin" id="sLogo" src={logo} alt="" />
+      <img className={`${spinningLogoClass}`} id="sLogo" src={logo} alt="" />
     </div>
   );
 };
