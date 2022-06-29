@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./CheckBox.css";
-const CheckBox = (props) => {
+const CheckBox = (props, ref) => {
   const [check, setCheck] = useState(false);
 
   return (
@@ -8,7 +8,10 @@ const CheckBox = (props) => {
       className={
         (check ? "on " : "off ") + " " + (props.isArabic ? "arabic" : null)
       }
-      onClick={() => setCheck(true)}
+      onClick={() => {
+        setCheck(true);
+        props.action(true);
+      }}
       id="CheckBox"
     >
       <p>✔️</p>
