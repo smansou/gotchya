@@ -48,3 +48,6 @@
   font-size: 1rem;
   width: 100%;
 }
+.hidden{
+  display: none;
+}
