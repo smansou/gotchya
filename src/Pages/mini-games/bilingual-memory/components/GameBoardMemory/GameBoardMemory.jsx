@@ -21,9 +21,9 @@ const GameBoardMemory = () => {
   },[])
 
   const getWords = async () => {
-    // let {data} =  await gotchya.get('/wordBank');
-    // return data;
-    return myWords;
+    let {data} =  await gotchya.get('/wordBank');
+    console.log(data);
+    return data;
    }
 
   const randomizeAndFill = async () => {
@@ -58,11 +58,7 @@ const GameBoardMemory = () => {
       setClearedCards((prev) => ({ ...prev, [cards[first].id]: true }));
       setOpenCards([]);
     }
-    console.log(pairsLeft);
-
-    
-    
-    // Flip cards after a 500ms duration
+    // Flip cards after a 500ms 
     timeout.current = setTimeout(() => {
       setOpenCards([]);
     }, 500);
@@ -92,10 +88,10 @@ const GameBoardMemory = () => {
   const checkIsFlipped = (index) => {
     return openCards.includes(index);
   };
-
   const checkIsInactive = (card) => {
     return Boolean(clearedCards[card.id]);
   };
+
   const drawBoard = (words) => {
     return words.map((word, i) => {
       return (
@@ -132,132 +128,3 @@ const GameBoardMemory = () => {
 
 export default GameBoardMemory;
 
-
-
-const myWords = [{
-  "hebrew": "אריה",
-  "arabic": "اسد",
-  "Hspelling": "אסאד",
-  "Aspelling": "ارييه"
-},
-{
-  "hebrew": "חתול",
-  "arabic": "قط",
-  "Hspelling": "קיט",
-  "Aspelling": "حاتول"
-},
-{
-  "hebrew": "כסא",
-  "arabic": "كرسي",
-  "Hspelling": "קורסיי",
-  "Aspelling": "كسيه"
-},
-{
-  "hebrew": "אולם",
-  "arabic": "قاعه",
-  "Hspelling": "קאעא",
-  "Aspelling": "اولام"
-},
-{
-  "hebrew": "רכב",
-  "arabic": "سياره",
-  "Hspelling": "סייארא",
-  "Aspelling": "ريخيف"
-},
-{
-  "hebrew": "עץ",
-  "arabic": "شجره",
-  "Hspelling": "שאגארא",
-  "Aspelling": "عيتس"
-},
-{
-  "hebrew": "שולחן",
-  "arabic": "طاوله",
-  "Hspelling": "טאוולא",
-  "Aspelling": "شولحان"
-},
-{
-  "hebrew": "אריה",
-  "arabic": "اسد",
-  "Hspelling": "אסאד",
-  "Aspelling": "ارييه"
-},
-{
-  "hebrew": "ציפור",
-  "arabic": "عصفور",
-  "Hspelling": "עספור",
-  "Aspelling": "تسيبور"
-},
-{
-  "hebrew": "בניין",
-  "arabic": "عماره",
-  "Hspelling": "עמארה",
-  "Aspelling": "بنيان"
-},
-{
-  "hebrew": "ענן",
-  "arabic": "غيمه",
-  "Hspelling": "גיימה",
-  "Aspelling": "عنان"
-},
-{
-  "hebrew": "שלום",
-  "arabic": "سلام",
-  "Hspelling": "סלאם",
-  "Aspelling": "شالوم"
-},
-{
-  "hebrew": "חברים",
-  "arabic": "اصحاب",
-  "Hspelling": "אסחאב",
-  "Aspelling": "حابيريم"
-},
-{
-  "hebrew": "אהבה",
-  "arabic": "حب",
-  "Hspelling": "חוב",
-  "Aspelling": "اهافا"
-},
-{
-  "hebrew": "מטוס",
-  "arabic": "طياره",
-  "Hspelling": "טיארא",
-  "Aspelling": "ماطوس"
-},
-{
-  "hebrew": "גבולות",
-  "arabic": "حدود",
-  "Hspelling": "חדוד",
-  "Aspelling": "جبولوت"
-},
-{
-  "hebrew": "שמן זית",
-  "arabic": "زيت زيتون",
-  "Hspelling": "זית זייתון",
-  "Aspelling": "شيمين زاييت"
-},
-{
-  "hebrew": "כלב",
-  "arabic": "كلب",
-  "Hspelling": "כאלב",
-  "Aspelling": "كيليب"
-},
-{
-  "hebrew": "מלחמה",
-  "arabic": "حرب",
-  "Hspelling": "חארב",
-  "Aspelling": "ميلحماه"
-},
-{
-  "hebrew": "עם",
-  "arabic": "شعب",
-  "Hspelling": "שאעב",
-  "Aspelling": "عام"
-},
-{
-  "hebrew": "נשר",
-  "arabic": "نسر",
-  "Hspelling": "ניסר",
-  "Aspelling": "نيشير"
-}
-]
