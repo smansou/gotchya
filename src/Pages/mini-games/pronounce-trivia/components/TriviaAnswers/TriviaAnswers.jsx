@@ -39,7 +39,7 @@ const TriviaAnswers = ({
     const rightAnswerJsx = (
       <RightAnswerCard
         key={rightAnswer}
-        answer={rightAnswer + " right"}
+        answer={rightAnswer}
         setWordsIndex={setWordsIndex}
         setCorrectAnswers={setCorrectAnswers}
         setIsHebrewWord={setIsHebrewWord}

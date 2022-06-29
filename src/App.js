@@ -1,6 +1,7 @@
 import "./App.css";
 import "./global-style/global.css";
 import "./global-style/fonts.css";
+import EndGame from "./Pages/EndGame/EndGame";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import IntroPage from "./Pages/Intro/IntroPage";
 import MemoryPage from "./Pages/mini-games/bilingual-memory/MemoryPage";
@@ -17,7 +18,7 @@ function App() {
           <Route path="/" element={<IntroPage />} />
           <Route path="/memory" element={<MemoryPage />} />
           <Route path="/pronounce" element={<TriviaPage />} />
-          <Route path="/leaderBoard" element={<LeaderBoard />} />
+          <Route path="/endGame" element={<EndGame />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -8,7 +8,7 @@ import TriviaQuestion from "../TriviaQuestion/TriviaQuestion";
 import gotchya from "../../../../../api/gotchyaApi.js";
 import "./GameBoardTrivia.css";
 
-const GameBoardTrivia = () => {
+const GameBoardTrivia = (props) => {
   const [words, setWords] = useState([]);
   const [arabicWrongAnswers, setArabicWrongAnswers] = useState([]);
   const [hebrewWrongAnswers, setHebrewWrongAnswers] = useState([]);
@@ -79,8 +79,7 @@ const GameBoardTrivia = () => {
     }, 1000);
 
     if (wordsIndex === 7) {
-      console.log(correctAnswers);
-      navigate("/");
+      props.isDone(true);
     }
   }, [wordsIndex]);
 
