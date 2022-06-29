@@ -31,18 +31,7 @@ const Message = ({
 
   return (
     <div className="message-window">
-      <div className="hebrew-message top">
-        <h1>{isCorrect ? "תשובה נכונה" : "תשובה לא נכונה"}</h1>
-        <h3>התשובה הייתה {correctAnswer}</h3>
-        <p>{wordInfo}</p>
-        <button
-          className={hebrewReady ? "clicked" : ""}
-          onClick={() => setHebrewReady((prev) => !prev)}
-        >
-          לשאלה הבאה
-        </button>
-      </div>
-      <div className="arabic-message">
+      <div className="arabic-message arabic">
         <h1>{isCorrect ? "صحيح" : "غير صحيح"}</h1>
         <h3>كان الجواب {correctAnswer}</h3>
         <p>{wordInfo}</p>
@@ -51,6 +40,17 @@ const Message = ({
           onClick={() => setArabicReady((prev) => !prev)}
         >
           السؤال التالي
+        </button>
+      </div>
+      <div className="hebrew-message">
+        <h1>{isCorrect ? "תשובה נכונה" : "תשובה לא נכונה"}</h1>
+        <h3>התשובה הייתה {correctAnswer}</h3>
+        <p>{wordInfo}</p>
+        <button
+          className={hebrewReady ? "clicked" : ""}
+          onClick={() => setHebrewReady((prev) => !prev)}
+        >
+          לשאלה הבאה
         </button>
       </div>
     </div>

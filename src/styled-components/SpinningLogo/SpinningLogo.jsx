@@ -3,7 +3,7 @@ import "./SpinningLogo.css";
 const SpinningLogo = () => {
   return (
     <div id="sLogoDiv">
-      <img className="show" id="sLogo" src={logo} alt="" />
+      <img className="spin" id="sLogo" src={logo} alt="" />
     </div>
   );
 };
