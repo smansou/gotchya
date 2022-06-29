@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SpinningLogo from "../../../../../styled-components/SpinningLogo/SpinningLogo";
 import Message from "../Message/Message";
 import TriviaAnswers from "../TriviaAnswers/TriviaAnswers";
 import TriviaQuestion from "../TriviaQuestion/TriviaQuestion";
@@ -98,48 +99,39 @@ const GameBoardTrivia = () => {
   }, [wordsIndex]);
 
   return (
-    <div className="trivia-game-board">
-      <TriviaQuestion
-        order={isHebrewWord ? 0 : 2}
-        pos={isHebrewWord ? "top" : ""}
-        word={
-          isHebrewWord ? words[wordsIndex].hebrew : words[wordsIndex].arabic
-        }
-        pronun={
-          isHebrewWord
-            ? words[wordsIndex].Hspelling
-            : words[wordsIndex].Aspelling
-        }
-      />
-      {displayMessage && (
-        <Message
-          isCorrect={isCorrect}
-          correctAnswer={
+    <>
+      <div className="trivia-game-board">
+        <TriviaQuestion
+          order={isHebrewWord ? 2 : 0}
+          pos={isHebrewWord ? "" : "arabic"}
+          word={
+            isHebrewWord ? words[wordsIndex].hebrew : words[wordsIndex].arabic
+          }
+          pronun={
+            isHebrewWord
+              ? words[wordsIndex].Hspelling
+              : words[wordsIndex].Aspelling
+          }
+        />
+
+        <TriviaAnswers
+          order={isHebrewWord ? 0 : 2}
+          pos={isHebrewWord ? "arabic" : ""}
+          rightAnswer={
             isHebrewWord ? words[wordsIndex].arabic : words[wordsIndex].hebrew
           }
-          wordInfo={"infoinfoinfoinfoinfoinfoinfoinfo"}
+          wrongAnswers={isHebrewWord ? arabicWrongAnswers : hebrewWrongAnswers}
           setWordsIndex={setWordsIndex}
+          setCorrectAnswers={setCorrectAnswers}
           setIsHebrewWord={setIsHebrewWord}
           setDisplayMessage={setDisplayMessage}
+          setIsCorrect={setIsCorrect}
+          clicked={clicked}
           setClicked={setClicked}
         />
-      )}
-      <TriviaAnswers
-        order={isHebrewWord ? 2 : 0}
-        pos={isHebrewWord ? "" : "top"}
-        rightAnswer={
-          isHebrewWord ? words[wordsIndex].arabic : words[wordsIndex].hebrew
-        }
-        wrongAnswers={isHebrewWord ? arabicWrongAnswers : hebrewWrongAnswers}
-        setWordsIndex={setWordsIndex}
-        setCorrectAnswers={setCorrectAnswers}
-        setIsHebrewWord={setIsHebrewWord}
-        setDisplayMessage={setDisplayMessage}
-        setIsCorrect={setIsCorrect}
-        clicked={clicked}
-        setClicked={setClicked}
-      />
-    </div>
+      </div>
+      <SpinningLogo isRight={isCorrect} />
+    </>
   );
 };
 export default GameBoardTrivia;
