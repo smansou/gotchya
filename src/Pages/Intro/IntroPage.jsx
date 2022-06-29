@@ -1,5 +1,5 @@
 import "./IntroPage.css";
-// import ExplanationSlide from "../../globalSlides/ExplanationSlide/ExplanationSlide";
+import ExplanationSlide from "../../globalSlides/explanationSlide/ExplanationSlide";
 import CheckBox from "../../styled-components/CheckBox/CheckBox";
 import SitingSvg from "./components/sitingSvg/sitingSvg";
 import PhoneSvg from "./components/PhoneSvg/PhoneSvg";
