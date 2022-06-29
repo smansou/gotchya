@@ -11,8 +11,8 @@ const TurnPanel = (props) => {
       }
       id="TurnPanel"
     >
-      <Timer />
-      <h1 className="sC">{props.buttom ? "لعب" : "תורך"}</h1>
+      {/* <Timer /> */}
+      <h1 className="sC">{props.buttom ? "دورك" : "תורך"}</h1>
       <Logo />
     </div>
   );

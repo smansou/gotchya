@@ -6,9 +6,9 @@ const MemoryPage = () => {
   const [currentPlayer, setCurrentPlayer] = useState()
   return (
     <div id="MemoryPage" className="page ">
-      <TurnPanel isPlaying={true} />
+      {/* <TurnPanel isPlaying={true} /> */}
       <GameBoardMemory />
-      <TurnPanel buttom={true} isPlaying={false} />
+      {/* <TurnPanel buttom={true} isPlaying={false} /> */}
     </div>
   );
 };

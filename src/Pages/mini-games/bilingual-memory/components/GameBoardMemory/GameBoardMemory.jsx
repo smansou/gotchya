@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import Card from "../Card/Card";
 import "./GameboardMemory.css";
 import { shuffleRandomly } from "../../../../../utils/utils";
-
+import TurnPanel from "../TurnPanel/TurnPanel";
 const GameBoardMemory = () => {
   const [cards, setCards] = useState([]);
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState({});
   const [moves, setMoves] = useState(0);
+  const [turn, setTurn] = useState(true);
   const timeout = useRef(null);
 
   useEffect(()=>{
@@ -35,9 +36,12 @@ const GameBoardMemory = () => {
     if (cards[first].id === cards[second].id) {
       setClearedCards((prev) => ({ ...prev, [cards[first].id]: true }));
       setOpenCards([]);
-      //show pic of word? 
-      return;
+      
+      
     }
+
+    
+    
     // Flip cards after a 500ms duration
     timeout.current = setTimeout(() => {
       setOpenCards([]);
@@ -50,11 +54,13 @@ const GameBoardMemory = () => {
       setOpenCards((prev) => [...prev, index]);
       // increase the moves once we opened a pair
       setMoves((moves) => moves + 1);
+      
     } else {
-      // If two cards are already open, we cancel timeout set for flipping cards back
+      // If two cards are already open, cancel timeout set for flipping cards back
       clearTimeout(timeout.current);
       setOpenCards([index]);
     }
+    setTurn(!turn);
   };
 
   useEffect(() => {
@@ -89,7 +95,65 @@ const GameBoardMemory = () => {
     });
   };
 
-  return <div className="GameBoardMemory">{drawBoard(cards)}</div>;
+
+
+
+  return( 
+    <>
+    <TurnPanel isPlaying={turn} />
+  <div className="GameBoardMemory">{drawBoard(cards)}</div>
+  <TurnPanel buttom={true} isPlaying={!turn} />
+  </>
+  )
+
+
 };
+
+
+
 export default GameBoardMemory;
 
+const myWords = [
+  {
+    hebrew: "מדינה",
+    arabic: "دولة",
+    Hspelling: "beit sefer", // arabic pronounciation in Hebrew letters
+    Aspelling: "madrasa", // Hebrew pronounciation in Arabic letters
+    id: 2,
+  },
+  {
+    hebrew: "ממשלה",
+    arabic: "بببب",
+    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
+    Aspelling: "madrasa", // Arabic pronounciation in english letters,
+    id: 3,
+  },
+  {
+    hebrew: "מחקר",
+    arabic: "ججججج",
+    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
+    Aspelling: "madrasa", // Arabic pronounciation in english letters,
+    id: 4,
+  },
+  {
+    hebrew: "חיסון",
+    arabic: "ددددد",
+    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
+    Aspelling: "madrasa", // Arabic pronounciation in english letters,
+    id: 5,
+  },
+  {
+    hebrew: "אורח",
+    arabic: "هههه",
+    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
+    Aspelling: "madrasa", // Arabic pronounciation in english letters,
+    id: 6,
+  },
+  {
+    hebrew: "רושם",
+    arabic: "ووووو",
+    Hspelling: "beit sefer", // Hebrew pronounciation in english letters
+    Aspelling: "madrasa", // Arabic pronounciation in english letters,
+    id: 7,
+  },
+];
