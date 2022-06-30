@@ -59,10 +59,10 @@ const GameBoardMemory = (props) => {
     
     const [first, second] = openCards;
     if (cards[first].id === cards[second].id) {
-      if (pairsLeft === 0) {
-        alert("Good Job!"); // winning scenario here
-        return;
-      }
+      // if (pairsLeft === 0) {
+      //   alert("Good Job!"); // winning scenario here
+      //   return;
+      // }
       
       setPairsLeft((prev) => prev - 1);
       setClearedCards((prev) => ({ ...prev, [cards[first].id]: true }));
