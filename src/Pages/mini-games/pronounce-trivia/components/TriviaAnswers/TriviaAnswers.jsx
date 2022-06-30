@@ -14,6 +14,7 @@ const TriviaAnswers = ({
   setClicked,
   order,
   pos,
+  setIsCorrectTracker,
 }) => {
   const [rand, setRand] = useState(null);
 
@@ -32,6 +33,7 @@ const TriviaAnswers = ({
           clicked={clicked}
           setClicked={setClicked}
           setIsCorrect={setIsCorrect}
+          setIsCorrectTracker={setIsCorrectTracker}
         />
       );
     });
@@ -46,6 +48,7 @@ const TriviaAnswers = ({
         clicked={clicked}
         setClicked={setClicked}
         setIsCorrect={setIsCorrect}
+        setIsCorrectTracker={setIsCorrectTracker}
       />
     );
 
