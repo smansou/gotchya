@@ -12,6 +12,8 @@ const GameBoardMemory = (props) => {
   const [moves, setMoves] = useState(0);
   const [pairsLeft, setPairsLeft] = useState(6);
   const [turn, setTurn] = useState(true);
+  const [preventSecondClick, setPreventSecondClick] = useState(true);
+  const [disableClicking, setDisableClicking] = useState(false);
   const timeout = useRef(null);
 
   useEffect(() => {
@@ -54,12 +56,14 @@ const GameBoardMemory = (props) => {
 
   // Check if both the words have same id. If so, mark them inactive
   const evaluate = () => {
+    
     const [first, second] = openCards;
     if (cards[first].id === cards[second].id) {
       if (pairsLeft === 0) {
         alert("Good Job!"); // winning scenario here
         return;
       }
+      
       setPairsLeft((prev) => prev - 1);
       setClearedCards((prev) => ({ ...prev, [cards[first].id]: true }));
       setOpenCards([]);
@@ -68,10 +72,16 @@ const GameBoardMemory = (props) => {
     timeout.current = setTimeout(() => {
       setOpenCards([]);
     }, 500);
+    setTimeout(() => {
+      
+      setDisableClicking(false);
+    }, 500);
+console.log(disableClicking);
   };
 
   const handleCardClick = (index) => {
     // Have a maximum of 2 items in array at once.
+    setPreventSecondClick(true)
     if (openCards.length === 1) {
       setOpenCards((prev) => [...prev, index]);
       // increase the moves once we opened a pair
@@ -86,6 +96,7 @@ const GameBoardMemory = (props) => {
 
   useEffect(() => {
     if (openCards.length === 2) {
+      setDisableClicking(true);
       setTimeout(evaluate, 500);
     }
   }, [openCards]);
@@ -96,19 +107,27 @@ const GameBoardMemory = (props) => {
   const checkIsInactive = (card) => {
     return Boolean(clearedCards[card.id]);
   };
+  const checkIsDisabled = () => {
+    return disableClicking;
+  };
+  const dummyFunc = () => {
+    
+    return;
+  };
 
   const drawBoard = (words) => {
     return words.map((word, i) => {
       return (
-        <div key={i}>
+        <div  key={i}>
           <Card
             text={word.word}
             id={word.id}
             index={i}
             isArabic={word.isArabic || ""}
-            onClick={handleCardClick}
+            onClick={(!disableClicking && handleCardClick ) || dummyFunc }
             isInactive={checkIsInactive(word)}
             isFlipped={checkIsFlipped(i)}
+            isDisabled={checkIsDisabled()}
           />
         </div>
       );
