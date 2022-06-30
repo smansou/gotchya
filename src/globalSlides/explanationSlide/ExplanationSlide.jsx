@@ -6,6 +6,7 @@ import { forwardRef } from "react";
 const ExplanationSlide = forwardRef((props, ref) => {
   return (
     <div
+      dir="rtl"
       ref={ref}
       id="ExplanationSlide"
       className={
