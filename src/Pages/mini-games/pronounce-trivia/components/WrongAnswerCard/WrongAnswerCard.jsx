@@ -7,20 +7,22 @@ const WrongAnswerCard = ({
   setIsCorrect,
   setWordsIndex,
   setIsHebrewWord,
+  setIsCorrectTracker,
 }) => {
   const onAnswerClick = () => {
     if (clicked) return;
     setClicked(true);
     setIsCorrect(false);
+    setIsCorrectTracker((prev) => !prev);
     setTimeout(() => {
-      setIsHebrewWord((prev) => !prev);
       setWordsIndex((prev) => prev + 1);
-    }, 1000);
+      setIsHebrewWord((prev) => !prev);
+    }, 2000);
   };
 
   return (
     <div className="answer-card" onClick={onAnswerClick}>
-      {answer}
+      <p>{answer}</p>
     </div>
   );
 };

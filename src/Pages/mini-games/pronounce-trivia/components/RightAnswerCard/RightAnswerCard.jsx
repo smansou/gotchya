@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./RightAnswerCard.css";
 
 const RightAnswerCard = ({
@@ -9,19 +9,25 @@ const RightAnswerCard = ({
   setIsCorrect,
   setWordsIndex,
   setIsHebrewWord,
+  setIsCorrectTracker,
 }) => {
   const [bg, setBg] = useState("");
-
+  useEffect(() => {
+    setBg("");
+    if (clicked) {
+      setBg("sBC");
+    }
+  }, [clicked]);
   const onAnswerClick = () => {
     if (clicked) return;
     setClicked(true);
-    setBg("sBC");
     setIsCorrect(true);
+    setIsCorrectTracker((prev) => !prev);
     setTimeout(() => {
       setCorrectAnswers((prev) => prev + 1);
       setIsHebrewWord((prev) => !prev);
       setWordsIndex((prev) => prev + 1);
-    }, 1000);
+    }, 2000);
   };
 
   return (

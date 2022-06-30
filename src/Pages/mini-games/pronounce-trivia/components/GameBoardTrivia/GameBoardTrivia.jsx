@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { arabicWords } from "../../wordsData/arabicWords.js";
 import { hebrewWords } from "../../wordsData/hebrewWords";
 import SpinningLogo from "../../../../../styled-components/SpinningLogo/SpinningLogo";
@@ -19,7 +18,7 @@ const GameBoardTrivia = (props) => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [spinningLogoClass, setSpinningLogoClass] = useState("spin");
   const [boardClassName, setBoardClassName] = useState("");
-  const navigate = useNavigate();
+  const [isCorerctTracker, setIsCorrectTracker] = useState(false);
 
   const chooseThreeWrongAnswers = (wrongAnswersList, words, lang) => {
     const chosenWords = [];
@@ -73,12 +72,13 @@ const GameBoardTrivia = (props) => {
 
   useEffect(() => {
     setClicked(false);
+    setTimeout(() => {}, 1000);
     setBoardClassName("switchPlaces");
     setTimeout(() => {
       setBoardClassName("");
-    }, 1000);
+    }, 2000);
 
-    if (wordsIndex === 7) {
+    if (wordsIndex > 7) {
       props.isDone(true);
     }
   }, [wordsIndex]);
@@ -89,12 +89,12 @@ const GameBoardTrivia = (props) => {
 
     setTimeout(() => {
       setSpinningLogoClass("spin");
-    }, 1000);
-  }, [isCorrect, wordsIndex]);
+    }, 2000);
+  }, [isCorrect, isCorerctTracker]);
 
   return (
     <>
-      {words.length > 0 && (
+      {words.length > 0 && wordsIndex < 8 && (
         <div className={`trivia-game-board ${boardClassName}`}>
           <TriviaQuestion
             order={isHebrewWord ? 2 : 0}
@@ -124,6 +124,7 @@ const GameBoardTrivia = (props) => {
             setIsCorrect={setIsCorrect}
             clicked={clicked}
             setClicked={setClicked}
+            setIsCorrectTracker={setIsCorrectTracker}
           />
         </div>
       )}

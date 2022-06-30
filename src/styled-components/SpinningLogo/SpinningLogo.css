@@ -20,10 +20,10 @@
   animation: rotate 10s infinite;
 }
 .red {
-  animation: rotate 10s infinite, redd 1s;
+  animation: rotate 10s infinite, redd 2s;
 }
 .green {
-  animation: rotate 10s infinite, greenn 1s;
+  animation: rotate 10s infinite, greenn 2s;
 }
 @keyframes rotate {
   0% {
